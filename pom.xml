@@ -12,7 +12,7 @@
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
-            <version>3.1.0</version>
+            <version>3.12.2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.kafka</groupId>
@@ -47,7 +47,7 @@
             <plugin>
                 <groupId>com.github.os72</groupId>
                 <artifactId>protoc-jar-maven-plugin</artifactId>
-                <version>3.1.0.1</version>
+                <version>3.11.4</version>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
@@ -55,11 +55,16 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <protocVersion>3.1.0</protocVersion>
                             <inputDirectories>
                                 <include>${project.basedir}/src/main/protobuf</include>
                             </inputDirectories>
-                            <outputDirectory>${project.basedir}/target/generated-sources/protobuf</outputDirectory>
+                            <outputTargets>
+                                <outputTarget>
+                                    <type>java</type>
+                                    <addSources>main</addSources>
+                                    <outputDirectory>${project.basedir}/target/generated-sources/protobuf</outputDirectory>
+                                </outputTarget>
+                            </outputTargets>
                         </configuration>
                     </execution>
                 </executions>

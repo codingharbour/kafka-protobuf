@@ -1,7 +1,6 @@
-package com.codingharbour.kafka.protobuf;
+package com.codingharbour.kafka.protobuf.producer;
 
 import com.codingharbour.protobuf.SimpleMessageProtos.SimpleMessage;
-import com.google.protobuf.GeneratedMessageV3;
 import io.confluent.kafka.serializers.protobuf.KafkaProtobufSerializer;
 import io.confluent.kafka.serializers.protobuf.KafkaProtobufSerializerConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -28,7 +27,7 @@ public class ProtobufProducer {
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaProtobufSerializer.class);
         properties.put(KafkaProtobufSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://localhost:8081");
 
-        Producer<String, GeneratedMessageV3> producer = new KafkaProducer<>(properties);
+        Producer<String, SimpleMessage> producer = new KafkaProducer<>(properties);
 
         //prepare the message
         SimpleMessage simpleMessage =
@@ -40,7 +39,8 @@ public class ProtobufProducer {
         System.out.println(simpleMessage);
 
         //prepare the kafka record
-        ProducerRecord<String, GeneratedMessageV3> record = new ProducerRecord<>("protobuf-topic", null, simpleMessage);
+        ProducerRecord<String, SimpleMessage> record
+                = new ProducerRecord<>("protobuf-topic", null, simpleMessage);
 
         producer.send(record);
         //ensures record is sent before closing the producer
