@@ -22,7 +22,7 @@
         <dependency>
             <groupId>io.confluent</groupId>
             <artifactId>kafka-protobuf-serializer</artifactId>
-            <version>7.5.2</version>
+            <version>7.6.0</version>
         </dependency>
     </dependencies>
 
